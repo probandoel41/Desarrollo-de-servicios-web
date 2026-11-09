@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title th:text="${usuario.id_usuario == null ? 'Nuevo usuario' : 'Editar usuario'}">Usuario</title><link rel="stylesheet" href="/css/styles.css"></head>
+<body class="app-shell"><aside class="sidebar"><h2>MiParqueo</h2><nav><ul><li><a href="/dashboard">Dashboard</a></li><li><a class="active" href="/view/usuarios/list">Usuarios</a></li><li><a href="/ocupacion">Ocupación</a></li><li><a href="/movimientos">Movimientos</a></li></ul></nav><form action="/view/logout" method="post"><button class="outline-button sidebar-logout" type="submit">Cerrar sesión</button></form></aside>
+<main class="page-content"><header class="page-header"><div><span class="eyebrow">Administración</span><h1 th:text="${usuario.id_usuario == null ? 'Nuevo usuario' : 'Editar usuario'}">Usuario</h1><p>El correo será el usuario de ingreso. Las contraseñas se guardan cifradas.</p></div></header>
+<section class="panel form-panel"><form th:action="@{/view/usuarios/save}" th:object="${usuario}" method="post"><input type="hidden" th:field="*{id_usuario}"><div class="form-grid">
+    <label>Nombres<input type="text" th:field="*{nombre}" required maxlength="80"><small class="field-error" th:errors="*{nombre}"></small></label>
+    <label>Apellidos<input type="text" th:field="*{apellido}" required maxlength="80"><small class="field-error" th:errors="*{apellido}"></small></label>
+    <label class="full-field">Correo de ingreso<input type="email" th:field="*{correo}" required maxlength="120"><small class="field-error" th:errors="*{correo}"></small></label>
+    <label>Teléfono<input type="tel" th:field="*{telefono}" required maxlength="15"><small class="field-error" th:errors="*{telefono}"></small></label>
+    <label>Contraseña<input type="password" th:field="*{contrasena}" th:required="${usuario.id_usuario == null}" autocomplete="new-password"><small class="field-error" th:errors="*{contrasena}"></small></label>
+</div><div class="form-actions"><a class="outline-button" href="/view/usuarios/list">Cancelar</a><button class="primary-button" type="submit">Guardar usuario</button></div></form></section></main></body>
+</html>
